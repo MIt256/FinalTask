@@ -4,5 +4,5 @@ data class Field(
     val name: String,
     val title: String,
     val type: String,
-    val values: Values
+    val values: Map<String,String>?
 )

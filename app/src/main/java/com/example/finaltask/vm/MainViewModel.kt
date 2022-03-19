@@ -1,8 +1,10 @@
 package com.example.finaltask.vm
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.finaltask.models.Item
+import com.example.finaltask.models.Post
 import com.example.finaltask.models.Repository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -16,6 +18,7 @@ class MainViewModel @Inject constructor(private val repo: Repository): ViewModel
 
     init {
         getData()
+        setData()
     }
 
     fun getLiveData() = data
@@ -25,5 +28,16 @@ class MainViewModel @Inject constructor(private val repo: Repository): ViewModel
             withContext(Dispatchers.Main) {data.value = repo.getData()}
         }
     }
+
+fun setData(){
+    var ans:String
+    CoroutineScope(Dispatchers.IO).launch {
+        val map = mapOf("text" to "hello", "numeric" to "2.5", "list" to "v1")
+        withContext(Dispatchers.Main) {ans = repo.setData(Post(map)).toString()
+            Log.e("answ",ans)}
+    }
+
+
+}
 
 }

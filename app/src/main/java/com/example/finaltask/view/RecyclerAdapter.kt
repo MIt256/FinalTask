@@ -40,11 +40,12 @@ class RecyclerAdapter() :
     //list
     private inner class ListViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val binding = ListItemBinding.bind(itemView)
-        fun bind(item:Field) {
+        fun bind(item: Field) {
             binding.title.text = item.title
-            for (i in 0..2) {
+
+            item.values?.forEach {
                 val rb = RadioButton(binding.root.context)
-                rb.text = item.values.v1
+                rb.text = it.value
                 binding.radioGroup.addView(rb)
             }
         }

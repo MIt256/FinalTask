@@ -17,7 +17,7 @@
             android:id="@+id/title"
             android:layout_width="158dp"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+             />
 
         <EditText
             android:id="@+id/inputText"
