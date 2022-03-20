@@ -17,31 +17,26 @@ class MainViewModel @Inject constructor(private val repo: Repository): ViewModel
     private var res: MutableLiveData<String> = MutableLiveData()
     private var dataToSend =  mutableMapOf<String,String>()
 
-    init {
-        getData()
-    }
+    fun isEmpty()=
+        data.value == null
 
     fun getAnswer() = res
 
     fun getLiveData() = data
 
-    fun getData(){
+    fun getForm(){
         CoroutineScope(Dispatchers.IO).launch {
             withContext(Dispatchers.Main) {data.value = repo.getData()
                 repo.getData()?.fields?.forEach{
-                    dataToSend += it.name to "null"
+                    dataToSend += it.name to ""
                 }
             }
         }
     }
 
-
-    fun setData(answers:Map<String,String>) {
+    suspend fun sendForm(answers: Map<String, String>) {
         dataToSend.putAll(answers)
-        CoroutineScope(Dispatchers.IO).launch {
-           // val map = mapOf("text" to "hello", "numeric" to "2.5", "list" to "v1")
-            withContext(Dispatchers.Main) { res.value = repo.setData(Post(dataToSend)).toString() }
-        }
+        withContext(Dispatchers.Main) { res.value = repo.setData(Post(dataToSend))?.result }
     }
 
 }

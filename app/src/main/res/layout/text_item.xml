@@ -23,8 +23,11 @@
             android:id="@+id/inputText"
             android:layout_width="171dp"
             android:layout_height="wrap_content"
+
             android:ems="10"
-            android:inputType="textPersonName"
-             />
+            android:focusable="auto"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:singleLine="true" />
     </TableRow>
 </androidx.constraintlayout.widget.ConstraintLayout>
