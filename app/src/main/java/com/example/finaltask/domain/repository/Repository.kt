@@ -1,9 +1,9 @@
-package com.example.finaltask.repository
+package com.example.finaltask.domain.repository
 
-import com.example.finaltask.api.QuestApi
-import com.example.finaltask.models.Answer
-import com.example.finaltask.models.Item
-import com.example.finaltask.models.Form
+import com.example.finaltask.data.api.QuestApi
+import com.example.finaltask.data.models.Answer
+import com.example.finaltask.data.models.Item
+import com.example.finaltask.data.models.Form
 import javax.inject.Inject
 
 class Repository @Inject constructor(private val api: QuestApi) {

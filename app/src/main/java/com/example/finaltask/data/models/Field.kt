@@ -1,4 +1,4 @@
-package com.example.finaltask.models
+package com.example.finaltask.data.models
 
 data class Field(
     val name: String,

@@ -1,4 +1,4 @@
-package com.example.finaltask.vm
+package com.example.finaltask.presentation.vm
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

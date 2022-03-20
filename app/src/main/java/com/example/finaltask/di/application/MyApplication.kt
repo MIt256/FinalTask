@@ -6,7 +6,9 @@ import com.example.finaltask.di.component.DaggerApplicationComponent
 
 
 class MyApplication : Application() {
-    private val component by lazy { DaggerApplicationComponent.create() }
+    private val component by lazy { DaggerApplicationComponent.builder()
+        .application(this)
+        .build()}
 
     fun getApplicationComponent(): ApplicationComponent = component
 }

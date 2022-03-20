@@ -1,10 +1,10 @@
-package com.example.finaltask.vm
+package com.example.finaltask.presentation.vm
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.finaltask.models.Item
-import com.example.finaltask.models.Form
-import com.example.finaltask.repository.Repository
+import com.example.finaltask.data.models.Item
+import com.example.finaltask.data.models.Form
+import com.example.finaltask.domain.repository.Repository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

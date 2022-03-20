@@ -1,7 +1,7 @@
 package com.example.finaltask.di.modules
 
 import com.example.finaltask.constants.Constants.Companion.URL_BASE
-import com.example.finaltask.models.QuestApi
+import com.example.finaltask.data.api.QuestApi
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit

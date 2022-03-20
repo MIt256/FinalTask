@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FinalTask">
         <activity
-            android:name=".view.MainActivity"
+            android:name="com.example.finaltask.presentation.view.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,10 +1,10 @@
-package com.example.finaltask.api
+package com.example.finaltask.data.api
 
 import com.example.finaltask.constants.Constants.Companion.URL_ENDPOINT_GET
 import com.example.finaltask.constants.Constants.Companion.URL_ENDPOINT_POST
-import com.example.finaltask.models.Answer
-import com.example.finaltask.models.Item
-import com.example.finaltask.models.Form
+import com.example.finaltask.data.models.Answer
+import com.example.finaltask.data.models.Item
+import com.example.finaltask.data.models.Form
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET

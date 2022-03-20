@@ -1,4 +1,4 @@
-package com.example.finaltask.view
+package com.example.finaltask.presentation.view
 
 import android.app.AlertDialog
 import android.content.Context
@@ -12,7 +12,7 @@ import com.bumptech.glide.RequestManager
 import com.example.finaltask.R
 import com.example.finaltask.databinding.ActivityMainBinding
 import com.example.finaltask.di.application.MyApplication
-import com.example.finaltask.vm.MainViewModel
+import com.example.finaltask.presentation.vm.MainViewModel
 import kotlinx.coroutines.*
 import javax.inject.Inject
 

@@ -1,4 +1,4 @@
-package com.example.finaltask.view
+package com.example.finaltask.presentation.view
 
 import android.text.Editable
 import android.text.TextWatcher
@@ -16,7 +16,7 @@ import com.example.finaltask.databinding.NumericItemBinding
 import com.example.finaltask.databinding.TextItemBinding
 
 
-import com.example.finaltask.models.Field
+import com.example.finaltask.data.models.Field
 
 class RecyclerAdapter() :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
