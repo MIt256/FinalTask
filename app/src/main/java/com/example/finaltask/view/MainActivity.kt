@@ -8,7 +8,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestManager
 import com.example.finaltask.R
 import com.example.finaltask.databinding.ActivityMainBinding
 import com.example.finaltask.di.application.MyApplication
@@ -18,6 +18,8 @@ import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 
+    @Inject
+    lateinit var glide: RequestManager
     @Inject
     lateinit var vmFactory: ViewModelProvider.Factory
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
@@ -47,7 +49,7 @@ class MainActivity : AppCompatActivity() {
             it?.let {
                 adapter.addToList(it.fields)
                 supportActionBar?.title = it.title
-                Glide.with(this)
+                glide
                     .load(it.image)
                     .into(binding.imageView)
             }

@@ -8,6 +8,8 @@
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="4dp"
+        android:weightSum="2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -15,15 +17,16 @@
 
         <TextView
             android:id="@+id/title"
-            android:layout_width="158dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-             />
+            android:layout_weight="1" />
 
         <EditText
             android:id="@+id/inputText"
-            android:layout_width="171dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
+            android:layout_weight="1"
             android:ems="10"
             android:focusable="auto"
             android:imeOptions="actionDone"
