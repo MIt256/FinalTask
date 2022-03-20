@@ -1,7 +1,10 @@
-package com.example.finaltask.models
+package com.example.finaltask.api
 
 import com.example.finaltask.constants.Constants.Companion.URL_ENDPOINT_GET
 import com.example.finaltask.constants.Constants.Companion.URL_ENDPOINT_POST
+import com.example.finaltask.models.Answer
+import com.example.finaltask.models.Item
+import com.example.finaltask.models.Form
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -12,5 +15,5 @@ interface QuestApi {
     suspend fun getDataApi(): Response<Item>
 
     @POST(URL_ENDPOINT_POST)
-    suspend fun setDataApi(@Body post:Post): Response<Answer>
+    suspend fun setDataApi(@Body post: Form): Response<Answer>
 }

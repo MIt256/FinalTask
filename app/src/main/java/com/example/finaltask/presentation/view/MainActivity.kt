@@ -49,8 +49,7 @@ class MainActivity : AppCompatActivity() {
             it?.let {
                 adapter.addToList(it.fields)
                 supportActionBar?.title = it.title
-                glide
-                    .load(it.image)
+                glide                    .load(it.image)
                     .into(binding.imageView)
             }
             binding.progressBar.visibility = View.INVISIBLE
@@ -60,6 +59,8 @@ class MainActivity : AppCompatActivity() {
             binding.progressBar.visibility = View.VISIBLE
 
             CoroutineScope(Dispatchers.IO).launch {
+                while (!checkConnectivity())
+                    delay(5000)
                 mainViewModel.sendForm(adapter.getAnswers())
                 //dialog
                 runOnUiThread { binding.progressBar.visibility = View.INVISIBLE }

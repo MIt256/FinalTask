@@ -3,8 +3,8 @@ package com.example.finaltask.vm
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.finaltask.models.Item
-import com.example.finaltask.models.Post
-import com.example.finaltask.models.Repository
+import com.example.finaltask.models.Form
+import com.example.finaltask.repository.Repository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -36,7 +36,7 @@ class MainViewModel @Inject constructor(private val repo: Repository): ViewModel
 
     suspend fun sendForm(answers: Map<String, String>) {
         dataToSend.putAll(answers)
-        withContext(Dispatchers.Main) { res.value = repo.setData(Post(dataToSend))?.result }
+        withContext(Dispatchers.Main) { res.value = repo.setData(Form(dataToSend))?.result }
     }
 
 }

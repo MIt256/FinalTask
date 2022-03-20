@@ -34,11 +34,9 @@ class RecyclerAdapter() :
             binding.inputText.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 }
-
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                     answers += item.name to s.toString()
                 }
-
                 override fun afterTextChanged(p0: Editable?) {
                 }
             })
@@ -53,13 +51,11 @@ class RecyclerAdapter() :
             binding.inputNumber.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 }
-
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                     val value = if (!s.toString().contains('.'))
                         s.toString() + ".0" else s.toString()
                     answers += item.name to value
                 }
-
                 override fun afterTextChanged(p0: Editable?) {
                 }
             })
