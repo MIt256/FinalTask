@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
+import androidx.core.view.get
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.RecyclerView
 import com.example.finaltask.R
@@ -21,8 +22,10 @@ import kotlin.coroutines.coroutineContext
 class RecyclerAdapter() :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    var items = ArrayList<Field>()
-    var answers = mapOf<String,String>()
+    private var items = ArrayList<Field>()
+    private var answers = mapOf<String,String>()
+
+    fun getAnswers() = answers
 
     //text
     private inner class TextViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -30,10 +33,11 @@ class RecyclerAdapter() :
         fun bind(item:Field) {
             binding.title.text = item.title
             binding.inputText.hint = item.name
-            binding.title.addTextChangedListener(object : TextWatcher {
+            binding.inputText.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 }
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    answers += item.name to s.toString()
                 }
                 override fun afterTextChanged(p0: Editable?) {
                 }
@@ -46,10 +50,11 @@ class RecyclerAdapter() :
         fun bind(item:Field) {
             binding.title.text = item.title
             binding.inputNumber.hint = item.name
-            binding.title.addTextChangedListener(object : TextWatcher {
+            binding.inputNumber.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 }
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    answers += item.name to s.toString()
                 }
                 override fun afterTextChanged(p0: Editable?) {
                 }
@@ -62,13 +67,19 @@ class RecyclerAdapter() :
         val binding = ListItemBinding.bind(itemView)
         fun bind(item: Field) {
             binding.title.text = item.title
+            item.values?.forEach{
+                if (it.key != "none") {
+                    val rb = RadioButton(binding.root.context)
+                    rb.text = it.value
+                    binding.radioGroup.addView(rb)
+                } else {answers += item.name to  it.value}
 
-            item.values?.forEach {
-                val rb = RadioButton(binding.root.context)
-                rb.text = it.value
-                binding.radioGroup.addView(rb)
+            }
+            binding.radioGroup.setOnCheckedChangeListener { r, i ->
+                answers += item.name to r.findViewById<RadioButton>(i).text.toString()
             }
         }
+
     }
     override fun getItemViewType(position: Int): Int {
         return when (items[position].type){

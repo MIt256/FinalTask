@@ -39,6 +39,7 @@ class MainActivity : AppCompatActivity() {
 //                mainViewModel.getData()
 //            }
 //        }
+
         //dialog
         mainViewModel.getAnswer().observe(this, {
             AlertDialog.Builder(binding.root.context).setMessage(it)
@@ -58,7 +59,8 @@ class MainActivity : AppCompatActivity() {
         })
 
         binding.actionButton.setOnClickListener {
-            mainViewModel.setData()
+
+            mainViewModel.setData(adapter.getAnswers())
         }
 
         adapter = RecyclerAdapter()
