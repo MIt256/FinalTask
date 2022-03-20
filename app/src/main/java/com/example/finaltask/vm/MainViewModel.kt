@@ -1,6 +1,5 @@
 package com.example.finaltask.vm
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.finaltask.models.Item
@@ -15,11 +14,13 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(private val repo: Repository): ViewModel()  {
 
     private var data: MutableLiveData<Item> = MutableLiveData()
+    private var res: MutableLiveData<String> = MutableLiveData()
 
     init {
         getData()
-        setData()
     }
+
+    fun getAnswer() = res
 
     fun getLiveData() = data
 
@@ -29,15 +30,12 @@ class MainViewModel @Inject constructor(private val repo: Repository): ViewModel
         }
     }
 
-fun setData(){
-    var ans:String
-    CoroutineScope(Dispatchers.IO).launch {
-        val map = mapOf("text" to "hello", "numeric" to "2.5", "list" to "v1")
-        withContext(Dispatchers.Main) {ans = repo.setData(Post(map)).toString()
-            Log.e("answ",ans)}
+    fun setData() {
+        var ans: String
+        CoroutineScope(Dispatchers.IO).launch {
+            val map = mapOf("text" to "hello", "numeric" to "2.5", "list" to "v1")
+            withContext(Dispatchers.Main) { res.value = repo.setData(Post(map)).toString() }
+        }
     }
-
-
-}
 
 }

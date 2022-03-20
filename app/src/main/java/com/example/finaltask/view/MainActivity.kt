@@ -1,5 +1,6 @@
 package com.example.finaltask.view
 
+import android.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -31,7 +32,6 @@ class MainActivity : AppCompatActivity() {
 
         (application as MyApplication).getApplicationComponent().inject(this)
 
-
 //        CoroutineScope(Dispatchers.IO).launch {
 //            if (mainViewModel.isListEmpty()) {
 //                while (!checkConnectivity())
@@ -39,8 +39,13 @@ class MainActivity : AppCompatActivity() {
 //                mainViewModel.getData()
 //            }
 //        }
-
-
+        //dialog
+        mainViewModel.getAnswer().observe(this, {
+            AlertDialog.Builder(binding.root.context).setMessage(it)
+                .setPositiveButton("OK", null)
+                .create()
+                .show()
+        })
 
         mainViewModel.getLiveData().observe(this, {
             it?.let {
@@ -49,9 +54,13 @@ class MainActivity : AppCompatActivity() {
                 Glide.with(this)
                     .load(it.image)
                     .into(binding.imageView)
-                //adapter.RecyclerAdapter(it.fields)
             }
         })
+
+        binding.actionButton.setOnClickListener {
+            mainViewModel.setData()
+        }
+
         adapter = RecyclerAdapter()
         binding.recycler.adapter = adapter
 

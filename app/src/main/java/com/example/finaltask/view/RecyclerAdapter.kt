@@ -1,9 +1,12 @@
 package com.example.finaltask.view
 
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
+import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.RecyclerView
 import com.example.finaltask.R
 import com.example.finaltask.databinding.ListItemBinding
@@ -19,7 +22,7 @@ class RecyclerAdapter() :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var items = ArrayList<Field>()
-
+    var answers = mapOf<String,String>()
 
     //text
     private inner class TextViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -27,6 +30,14 @@ class RecyclerAdapter() :
         fun bind(item:Field) {
             binding.title.text = item.title
             binding.inputText.hint = item.name
+            binding.title.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                }
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                }
+                override fun afterTextChanged(p0: Editable?) {
+                }
+            })
         }
     }
     //numeric
@@ -35,7 +46,16 @@ class RecyclerAdapter() :
         fun bind(item:Field) {
             binding.title.text = item.title
             binding.inputNumber.hint = item.name
+            binding.title.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                }
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                }
+                override fun afterTextChanged(p0: Editable?) {
+                }
+            })
         }
+
     }
     //list
     private inner class ListViewHolder(view: View) : RecyclerView.ViewHolder(view) {
