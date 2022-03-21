@@ -56,9 +56,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.actionButton.setOnClickListener {
+            binding.actionButton.isClickable = false
             binding.progressBar.visibility = View.VISIBLE
 
-            CoroutineScope(Dispatchers.IO).launch {
+            CoroutineScope(Dispatchers.Default).launch {
                 while (!checkConnectivity())
                     delay(5000)
                 mainViewModel.sendForm(adapter.getAnswers())
@@ -71,6 +72,7 @@ class MainActivity : AppCompatActivity() {
                         .create()
                         .show()
                 }
+                binding.actionButton.isClickable = true
             }
         }
         adapter = RecyclerAdapter()

@@ -54,9 +54,11 @@ class RecyclerAdapter() :
                 override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 }
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    val value = if (!s.toString().contains('.'))
-                        s.toString() + ".0" else s.toString()
-                    item.value = value
+                    var number = s.toString()
+                    if (number != "") {
+                        if (number == ".") number += "0"
+                        item.value = number.toDouble().toString()
+                    }
                 }
                 override fun afterTextChanged(p0: Editable?) {
                 }
@@ -79,12 +81,12 @@ class RecyclerAdapter() :
                     //todo
                     if (item.value == it.key)
                         rb.isChecked = true
-                } else item.value = it.key
+                } else
+                    if (item.value==null) item.value = it.key
             }
 
             binding.radioGroup.setOnCheckedChangeListener { r, i ->
                 item.value = r.findViewById<RadioButton>(i).hint.toString()
-                //answers += item.name to r.findViewById<RadioButton>(i).hint.toString()
             }
 
         }
@@ -96,9 +98,6 @@ class RecyclerAdapter() :
             FieldType.TEXT -> 0
             FieldType.NUMERIC -> 1
             FieldType.LIST -> 2
-//            TYPE_TEXT -> 0
-//            TYPE_NUMERIC -> 1
-//            else -> 2
         }
     }
 
@@ -121,9 +120,6 @@ class RecyclerAdapter() :
             FieldType.TEXT -> (holder as TextViewHolder).bind(recyclerViewItems[position])
             FieldType.NUMERIC ->  (holder as NumericViewHolder).bind(recyclerViewItems[position])
             FieldType.LIST -> (holder as ListViewHolder).bind(recyclerViewItems[position])
-//            TYPE_TEXT -> (holder as TextViewHolder).bind(recyclerViewItems[position])
-//            TYPE_NUMERIC -> (holder as NumericViewHolder).bind(recyclerViewItems[position])
-//            else -> (holder as ListViewHolder).bind(recyclerViewItems[position])
         }
     }
 
