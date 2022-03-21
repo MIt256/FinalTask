@@ -1,15 +1,18 @@
 package com.example.finaltask.presentation.vm
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.finaltask.constants.Constants.Companion.ERROR
+import com.example.finaltask.constants.Constants.Companion.WRONG
 import com.example.finaltask.data.models.Field
 import com.example.finaltask.data.models.Item
-import com.example.finaltask.data.models.Form
 import com.example.finaltask.domain.repository.Repository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.lang.Exception
 import javax.inject.Inject
 
 class MainViewModel @Inject constructor(private val repo: Repository): ViewModel()  {
@@ -26,13 +29,21 @@ class MainViewModel @Inject constructor(private val repo: Repository): ViewModel
 
     fun getForm(){
         CoroutineScope(Dispatchers.IO).launch {
-            withContext(Dispatchers.Main) {data.value = repo.getData()
+            try {
+            withContext(Dispatchers.Main) {
+                data.value = repo.getData()
             }
+            } catch (ex:Exception){Log.e(ERROR,ex.toString())}
         }
     }
 
    suspend fun sendForm(dataToSend: ArrayList<Field>) {
+       try {
        withContext(Dispatchers.Main) { res = repo.setData(dataToSend)?.result }
+       } catch (ex:Exception){
+           Log.e(ERROR,ex.toString())
+           res = WRONG
+       }
    }
 
 
