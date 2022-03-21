@@ -22,20 +22,20 @@ class RecyclerAdapter() :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var recyclerViewItems = ArrayList<Field>()
-    private var answers = mapOf<String, String>()
 
-    fun getAnswers() = answers
+    fun getAnswers() = recyclerViewItems
 
     //text
     private inner class TextViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val binding = TextItemBinding.bind(view)
         fun bind(item: Field) {
             binding.title.text = item.title
+            binding.inputText.setText(item.value)
             binding.inputText.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 }
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    answers += item.name to s.toString()
+                    item.value = s.toString()
                 }
                 override fun afterTextChanged(p0: Editable?) {
                 }
@@ -48,13 +48,15 @@ class RecyclerAdapter() :
         val binding = NumericItemBinding.bind(itemView)
         fun bind(item: Field) {
             binding.title.text = item.title
+            //todo
+            binding.inputNumber.setText(item.value)
             binding.inputNumber.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 }
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                     val value = if (!s.toString().contains('.'))
                         s.toString() + ".0" else s.toString()
-                    answers += item.name to value
+                    item.value = value
                 }
                 override fun afterTextChanged(p0: Editable?) {
                 }
@@ -74,13 +76,15 @@ class RecyclerAdapter() :
                     rb.hint = it.key
                     rb.text = it.value
                     binding.radioGroup.addView(rb)
-                } else {
-                    answers += item.name to it.key
-                }
+                    //todo
+                    if (item.value == it.key)
+                        rb.isChecked = true
+                } else item.value = it.key
             }
 
             binding.radioGroup.setOnCheckedChangeListener { r, i ->
-                answers += item.name to r.findViewById<RadioButton>(i).hint.toString()
+                item.value = r.findViewById<RadioButton>(i).hint.toString()
+                //answers += item.name to r.findViewById<RadioButton>(i).hint.toString()
             }
 
         }

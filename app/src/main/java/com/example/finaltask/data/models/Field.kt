@@ -5,4 +5,6 @@ data class Field(
     val title: String,
     val type: String,
     val values: Map<String,String>?
-)
+){
+    var value:String=""
+}

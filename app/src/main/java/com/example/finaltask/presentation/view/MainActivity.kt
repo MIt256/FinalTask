@@ -45,15 +45,15 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        mainViewModel.getLiveData().observe(this, {
+        mainViewModel.getLiveData().observe(this) {
             it?.let {
                 adapter.addToList(it.fields)
                 supportActionBar?.title = it.title
-                glide                    .load(it.image)
+                glide.load(it.image)
                     .into(binding.imageView)
             }
             binding.progressBar.visibility = View.INVISIBLE
-        })
+        }
 
         binding.actionButton.setOnClickListener {
             binding.progressBar.visibility = View.VISIBLE
@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity() {
                 runOnUiThread { binding.progressBar.visibility = View.INVISIBLE }
                 runOnUiThread {
                     AlertDialog.Builder(binding.root.context)
-                        .setMessage(mainViewModel.getAnswer().value)
+                        .setMessage(mainViewModel.getAnswer())
                         .setPositiveButton(R.string.ok, null)
                         .create()
                         .show()
