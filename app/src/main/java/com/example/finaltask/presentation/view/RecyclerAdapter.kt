@@ -8,9 +8,9 @@ import android.view.ViewGroup
 import android.widget.RadioButton
 import androidx.recyclerview.widget.RecyclerView
 import com.example.finaltask.R
+import com.example.finaltask.constants.Constants
 import com.example.finaltask.constants.Constants.Companion.NONE
-import com.example.finaltask.constants.Constants.Companion.TYPE_NUMERIC
-import com.example.finaltask.constants.Constants.Companion.TYPE_TEXT
+import com.example.finaltask.constants.FieldType
 import com.example.finaltask.databinding.ListItemBinding
 import com.example.finaltask.databinding.NumericItemBinding
 import com.example.finaltask.databinding.TextItemBinding
@@ -93,9 +93,12 @@ class RecyclerAdapter() :
 
     override fun getItemViewType(position: Int): Int {
         return when (recyclerViewItems[position].type) {
-            TYPE_TEXT -> 0
-            TYPE_NUMERIC -> 1
-            else -> 2
+            FieldType.TEXT -> 0
+            FieldType.NUMERIC -> 1
+            FieldType.LIST -> 2
+//            TYPE_TEXT -> 0
+//            TYPE_NUMERIC -> 1
+//            else -> 2
         }
     }
 
@@ -115,9 +118,12 @@ class RecyclerAdapter() :
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (recyclerViewItems[position].type) {
-            TYPE_TEXT -> (holder as TextViewHolder).bind(recyclerViewItems[position])
-            TYPE_NUMERIC -> (holder as NumericViewHolder).bind(recyclerViewItems[position])
-            else -> (holder as ListViewHolder).bind(recyclerViewItems[position])
+            FieldType.TEXT -> (holder as TextViewHolder).bind(recyclerViewItems[position])
+            FieldType.NUMERIC ->  (holder as NumericViewHolder).bind(recyclerViewItems[position])
+            FieldType.LIST -> (holder as ListViewHolder).bind(recyclerViewItems[position])
+//            TYPE_TEXT -> (holder as TextViewHolder).bind(recyclerViewItems[position])
+//            TYPE_NUMERIC -> (holder as NumericViewHolder).bind(recyclerViewItems[position])
+//            else -> (holder as ListViewHolder).bind(recyclerViewItems[position])
         }
     }
 
